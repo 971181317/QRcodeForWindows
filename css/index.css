@@ -1,0 +1,29 @@
+body {
+    margin: 0%;
+    overflow: hidden;
+    background-color: #2f3241;
+    width: 800px;
+    height: 500px;
+    color: rgb(0, 204, 204);
+}
+
+#v-bar {
+    position: fixed;
+    top: 0;
+    height: 30px;
+    width: 800px;
+    -webkit-app-region: drag;
+}
+
+iframe#loading {
+    opacity: 100;
+    position: absolute;
+}
+
+.flex-style {
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

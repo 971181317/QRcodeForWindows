@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>QRcodeForWindows</title>
+    <script src="src/source/jquery-3.5.1.min.js"></script>
+    <link href="bootstrap/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" src="bootstrap/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/index.css">
+    <script src="src/source/qrcode.js"></script>
+</head>
+
+<body>
+    <div id="v-bar"></div>
+    <iframe id="loading" frameborder="0" scrolling="no" src="loading.html" width="100%" height="500px"></iframe>
+    <div id="app" style="opacity: 0;">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-1">
+                </div>
+                <div class="col-xs-4 flex-style">
+                    <input id="qrcode-text" type="text" class="form-control" placeholder="请输入转化的文本" style="background-color: rgb(50,53,62);color: white;">
+                </div>
+                <div class="col-xs-1">
+                </div>
+                <div class="col-xs-1">
+                </div>
+                <div class="col-xs-4 flex-style">
+                    <div id="qrcode">
+                        <img alt="Scan me!" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACtWK6eAAAAAXNSR0IArs4c6QAADaFJREFUeF7t3dF240YMA9DN/3/09ijN1k7jte+MoZGcIK+lQBAkhiM73bz9+vXr96/+/Pr9OyfD29tbTFHlJTmTWLECTw60dTI3GScv9h49HR4pUYZVcLYY5SU5k1jK/9XjapCPDurwSMNlWAWnBlGV9ourQWqQL9OVNPh+o7sGuQapQWqQO16rQWqQGqQGebyO+w5y0ahXrCst+inWv2LUIDXIrWO0V6xesXrFevaKlTxdH1928hFyZdAaBStfQQYxWaNiZZjnUbSPtEF+ghhaowqbb+nziMkaFet51vsgaB9rkMErlgq7T1ufQ9WhlhoV6znG+z0tNW7Za5AaZOodpAa5ku0niKE16smz39k3j5ysUbHm2e77pPaxG6QbpBukn2I9/vVzPRH15Nn3/JtDT9aoWHNM939K+9gN0g3SDdIN0g2yzYCe+nK6Ktb+u2Aug9TYT7EmPohQYefatu9TOtRSo2LtW9E8utQYN4gmnS/r85PaJOGlWMJd8o2c6JIzGSP8VS/BSnJP84q+g7yyGCqsNFN1SOYUXhoj/JW7YCkviUvzqkEGX9KlSToU2kzJmYwR/spdsJLc07xqkBpk10+xapAreV9ZDD155LRTHZI5hZfGCH/lLljKS+LSvLpBukG6Qe44rwapQWqQGiT3RaGseb1W6HVAciZjhL9yF6wk9zSvbpBukG6QbpBzbpAjTk7JKad++qQWXhKT5tUNcuAGkYZrjA6G4NUgF5VqkBqkV6xesXrFks3xJ6YbpBvky7ysvqKMDKzEruav+cRsUp/GpHn1itUrVq9YvWL1iqUn8BYnp376pB7hdy82zasbpBukG6QbpBtk5ITuBulLel/S752a8EdI01eZEQP3ioVqJZukWEJNTmDB2WKUl+Q8K5ZqIXHJGt/fx+Tvg6STSqESk+SlWMJLhlVwahBV6RKnfdQe1SAnf0lPNvysWOM2+PsTyRq7Qa50VmGlmXo6CZbykpxnxRIdNCZZYw1Sg9ycu9Vm0+GXuBpkYqiTDZcmST7B6TuIqtR3kJtKJU8LxZKW1SAXlZJaiPbaR+XVl/S+pH+ZOxme9CDK8EtMmlcNUoPUIHecFzWIOPyImJ9wIiZ1TeqV5JXEkhrjn2IlC0hiiRjp1Zzir7xS+d6HIvirJkleSSypsQbZ6ROxZCNrkKSa4x8e9Io1+A6iJ0+qrTVISsnPONrHGqQG2fUlfZ/xfh61BrnSUMTQk1qwnm/fBUF5JXNKjUfwWl1j30H6DnJz5mqQq3eV5K+7Jx2exEo2XLCS3I84qaXGI3gldZUau0G6QbpBHriuL+l9Se9L+h2TkEGSq+2sWHplkNX8E7DO2sc0rxpkhw1Sg6TH9Di8GqQGmbpiHTeyazPXIDVIDdJ3kMenzk+4FiVrfKzo94joBukG6QbpBnl8miVP15+A9VjR7xHRDdIN0g3SDfL4NPsJp36yxseKfo+It9+q2veo9+kq5IvCp5NcAbQ9STXHsWqQQc1qkEHBXjy8BhlsYA0yKNiLh9cggw2sQQYFe/HwGmSwgTXIoGAvHl6DDDawBhkU7MXDa5DBBtYgg4K9eHgNMtjAGmRQsBcPr0EGG1iDDAr24uE1yGADa5BBwV48/LQGWT2I2sfkN9tSYzKf1ii8FGs1f+WuvGoQ7fRHnAorsNLMZD7htMUIL8VazV+5K68aRDtdgwwq9W+4DuIU+I2HapCUkpM4yYZLM5P5tGThpVir+St35dUNop3uBhlUqhtkSjB9SE8CxUvF6ckj+aTGZD7h1HeQzyp1g+jUdIMMKtUNMiWYPiSnq2Il45InutSYzKc6CC/FWs1fuSuvbhDtdDfIoFLdIF8EU/dOKf3EQ3paSIqz1ijcNUb0Uh2SWMJf8gnOn5joBlHRRggmYpOinbXGhE5/MEQv1SGJJTVKPsGpQUZUuorVwZiEP8VjMmSqQxJLxJF8glODjKhUg0xfp2Vg1WzSMsknODXIiEo1SA0yOS+fHkueBAk+I3dqzXfWGpW/xMkprDoksVLcBacbZESlbpBukMl56QZJCHcyjOSpn8QSmSSf4HSDjKjUDdINMjkv3SAJ4U6GIadw30EmmqaiTUCf5pHVw6OFJ7VP1ij8JZ/g7BHzI75JTwonzdRhFSzlrjkFT3itzie894ipQQZVTQ6PYCm91QO7Op/qkI6rQQYVlaHW4REspac5BU94rc4nvPeIqUEGVU0Oj2ApvdUDuzqf6pCOq0EGFZWh1uERLKWnOQVPeK3OJ7z3iKlBBlVNDo9gKb3VA7s6n+qQjqtBBhWVodbhESylpzkFT3itzie894ipQQZVTQ6PYCm91QO7Op/qkI6jv5OebKQWIA34CbxEh03TpBaSU/MJls6E5NR8grXxqkG0Ox9x0gAVX1JLvhrkomRarxpEpvQqRhpQg4wPrLRBdJX+jBwoNYh0pgb5opIM6/sV5W0bscyP5NR8gtUr1kTfpAEqvqSXfCMnYiqn1qj8hZfk1HyCVYNIV/4XIw1Q8SW95KtBxq902qNesWRKe8XqFevenKjbBmftbricnD+Bl+jQDdINctNMNchFlqQWYkrNJ1h6sEpOzSdYfQfRzvSK1SvW2a5YE7P710f0VJGccvKszie8309D/MhVatScEpfkpVjC69QbRAuQuKRoMjyr84kGNYiq9DnutJ9izZVz+6nVA7s6n2qlvOQQ0JwSl+SlWMKrG0RVuoqT4Uk2SfJpGcormVO4JXkplvCqQVSlGmRCKX9Eh1qMq1jKrlcsVeojbnWTJJ+WoMOTzCnckrwUS3h1g6hK3SATSvkjOtRiXMVSdt0gqlQ3yKBSHq5DXYO4pkOR2gABXd0kySe8368L/R5EpfovLvr/pA9nf8EHdMikNBn+1fmE91ExooVoOsK/BhlRa+AUFlhppgyF5NpiJJ9iHREnWqRrrEEGOy1NUkhp5up8yv2IONFCNB3hXoOMqNUNMqhWNrwGyeq5C5o0SRPLabc6n3I/Ik60EE1HuHeDjKjVDTKoVja8BsnquQuaNEkTy2m3Op9yPyJOtBBNR7h3g4yo1Q0yqFY2vAbJ6rkLmjRJE8tptzqfcj8iTrQQTUe4d4OMqNUNMqhWNvwQg2zfH2XLeE00PXmkSUcoIPyT3CWf6nBWXht/+mVFLfSV47ThyWYm9RL+Se6ST+s7K68a5KqD2vBkM3WAJE74J7lLPuH9PoT4S5SCl+RVg9QgMnM3Y5KDWINMt2Hdg9rwZDOT1Qn/JHfJp/WdlVc3SDeIzvCXuBpkWrrXfFAbnjztkkoJ/yR3yaf1nZVXN0g3iM5wN8i0Ut/kQT0Rk6ddUjrhn+Qu+bS+s/LiDZIUQ0VLxkkDtEbBUu6aU/FWxqkOUuMRWKoVfVEoRWrCI+KkAVqjYGmNmlPxVsapDlLjEViqVQ3yoZQ08n3lnvhLLW16Ik51EF2PwFINapAaRGflU9wRQ500mxZdg9QgOis1yN+UEudOqbzoITnttEbB0rI0p+KtjFMdpMYjsFSrbpBuEJ2VbpBukMezoqfdY6TX/ofcVIduEJmEg2OkmdLIfop1aaRoukWLrkdg6Uj2itUrls5Kr1jPXrH0JJjqyI2H5HTSUz+JpfVJTtX0rFiihXDXPkq+kZjoBtFmjhC8F5sUNoml9UlO1fSsWKKFcK9BRMn/xSSFTWJpKZKzBhl/71H9Ja4b5OTvIDVIDSJGvhkjJ7Cu5iSWFiQ5a5AaROfpS5wMWA0yPmCiqxpXmiv5tI+SbySmV6xesaYOnhrkSrazOjzJK4mlJ5Tk1EE8K5ZoIdy7QUTJfor1V5VkyI4wm7RVuNcgouQJDCI0dRAF68zDk+KveokWiiXc300p/3i1EDvC4UleiiXCJpukvJI5pUaNEf7KPYml/GuQwZd0EVYbLlgyFEccTsJ9ixH+qlcSS/nXIDWIzspUXHKok1haTA1Sg+isTMUlhzqJpcXUIDWIzspUXHKok1haTA1Sg+isTMUlhzqJpcXUIDWIzspUXHKok1haTA1Sg+isTMUlhzqJpcXUIDWIzspUXHKok1haTA2yg0FU/GScfJcgA7ZxEqwk9ySW1qg5a5Aa5Mus1CAXSWqQGqQGubNOapAapAapQbZz4P5P+u76KF/6v8u1SGsUrDT/FJ7WqPm6QbpBukG6QbpBthnQ07UbpC/pX84MHR5dzavjZKi1RsFaXZ/m0xoVr1esXrF6xVp1xVJXro6TEzF58ki+kStPSi/lJflUL8l5BJbUuMVEN4gmXR2XbJJwl3w1yEXJGkSmascYGVhtktCUfDVIDSKztCRGBrYGGWuF6pXUPoml1faKtcNLujSyG6QbRE26e5wMrJ6IQlby1SA1iMzSkhgZ2BpkrBWqV1L7JJZW2ytWr1g6K5/iapArOVSMKaUXPLT65JF8vWL1irVg9C2FDGzyEJB8Ncg3MoiN4WtHHWEQUUx5iSmPwJIaNWZ1jRsvegfRAl45TodHapRGCs7IlpGcWmMSS+uUuCQvwapBdnrPUvFlKI4YauGvvKRGjUnyEqwapAa5OZsyPDWI2vqbxCUbLgOmsikvyXkEltYpcatr7AbpBukGeeDMvqR/CKSna+qkE5y+pH9WqRtEp2aHuBrkImpyEJOtSvISrF6xesXqFatXLDvDukG6QW5Nyj974XyzlkfX7QAAAABJRU5ErkJggg=="
+                            style="display: block;">
+                    </div>
+                    <div style="margin-top: 20px;">
+                        <button id="save-qrcode" class="btn btn-info" type="submit">保存二维码</button>
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-7">
+                </div>
+                <div class="col-xs-4 flex-style">
+                </div>
+                <div class="col-xs-1">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    //加载界面
+    $("#loading").animate({
+        opacity: 0.5
+    }, 2000, function() {
+        $("#app").animate({
+            opacity: 1
+        }, 2000);
+        $("#loading").animate({
+            opacity: 0
+        }, 1000, function() {
+            //删除loading
+            $(this).remove();
+        });
+    });
+    // 实时转换二维码
+    $("#qrcode-text").bind('input propertychange', function() {
+        //清初原有的二维码
+        $("#qrcode").empty();
+        let text = $("#qrcode-text").val()
+        var qrcode = new QRCode("qrcode", {
+            width: 200,
+            height: 200,
+            colorDark: '#000000',
+            colorLight: '#ffffff',
+            correctLevel: QRCode.CorrectLevel.H
+        });
+        qrcode.makeCode(text);
+    });
+    // 保存图片
+    $("#save-qrcode").click(() => {
+        var url = $("#qrcode img").attr("src"); // 获取图片地址
+        var a = document.createElement('a'); // 创建一个a节点插入的document
+        var event = new MouseEvent('click') // 模拟鼠标click点击事件
+        a.download = 'qrcode' // 设置a节点的download属性值
+        a.href = url; // 将图片的src赋值给a节点的href
+        a.dispatchEvent(event) // 触发鼠标点击事件
+    })
+</script>
+
+</html>
