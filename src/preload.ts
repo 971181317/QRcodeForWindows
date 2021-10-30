@@ -1,4 +1,4 @@
-const { contextBridge, ipcRenderer } = require('electron')
+import { contextBridge, ipcRenderer } from 'electron'
 
 //在 window对象中添加了一个新的API叫做 file。 此 API 暴露IPC 通道到渲染器进程
 contextBridge.exposeInMainWorld('file', {

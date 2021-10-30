@@ -1,6 +1,6 @@
-const { app, BrowserWindow, ipcMain, Tray, Menu, nativeImage, dialog } = require('electron')
+import { app, BrowserWindow, ipcMain, Tray, Menu, nativeImage, dialog } from 'electron';
 
-function createMainWindow() {
+function createMainWindow():void {
     const win = new BrowserWindow({
         width: 800,
         height: 500,
@@ -19,11 +19,16 @@ function createMainWindow() {
             color: '#2f3241',
             symbolColor: '#74b1be'
         },
-        show: false
+        show: false,
+        //解决窗口引入nodejs语法隔离问题
+        // webPreferences:{ 
+        //     nodeIntegration: true, 
+        //     contextIsolation: false 
+        // }
             // transparent: true
     })
 
-    win.loadFile('index.html');
+    win.loadFile('html/index.html');
 
     win.webContents.openDevTools({ mode: 'undocked' });
     win.once('ready-to-show', () => {
@@ -31,7 +36,7 @@ function createMainWindow() {
     })
 }
 
-function createAboutWindow() {
+function createAboutWindow():void {
     const win = new BrowserWindow({
         width: 260,
         height: 130,
@@ -44,7 +49,7 @@ function createAboutWindow() {
             // transparent: true
     })
 
-    win.loadFile('about.html');
+    win.loadFile('html/about.html');
     win.once('ready-to-show', () => {
         win.show()
     });
@@ -65,13 +70,15 @@ app.whenReady().then(() => {
     })
 
     const icon = nativeImage.createFromPath('path/to/asset.png')
+
+    // 设置windows状态栏的图标信息
     tray = new Tray(icon)
 
     // 注意: 你的 contextMenu, Tooltip 和 Title 代码需要写在这里!
     const contextMenu = Menu.buildFromTemplate([{
             label: '关于',
             type: 'normal',
-            click: (menuItem, browserWindow, event) => {
+            click: (_menuItem: any, _browserWindow: any, _event: any) => {
                 createAboutWindow()
             }
         },

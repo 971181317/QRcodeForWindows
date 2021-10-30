@@ -1,0 +1,2 @@
+(()=>{"use strict";var e,r={298:e=>{e.exports=require("electron")}},t={};(e=function e(i){var n=t[i];if(void 0!==n)return n.exports;var o=t[i]={exports:{}};return r[i](o,o.exports,e),o.exports}(298)).contextBridge.exposeInMainWorld("file",{getSaveFilePath:function(){return e.ipcRenderer.invoke("file:get-save-file-path")}})})();
+//# sourceMappingURL=mainPreload.bundle.js.map
