@@ -1,66 +1,11 @@
-import { app, BrowserWindow, ipcMain, Tray, Menu, nativeImage, dialog } from 'electron';
-
-function createMainWindow():void {
-    const win = new BrowserWindow({
-        width: 800,
-        height: 500,
-        // 前置脚本
-        // webPreferences: {
-        //     preload: path.join(__dirname, 'src/preload.js')
-        // },
-        // 不可调节窗口大小
-        resizable: false,
-        // 不可最大化
-        minimizable: false,
-        // 隐藏titleBar
-        titleBarStyle: 'hidden',
-        // 显示titleBar的按钮
-        titleBarOverlay: {
-            color: '#2f3241',
-            symbolColor: '#74b1be'
-        },
-        show: false,
-        //解决窗口引入nodejs语法隔离问题
-        // webPreferences:{ 
-        //     nodeIntegration: true, 
-        //     contextIsolation: false 
-        // }
-            // transparent: true
-    })
-
-    win.loadFile('html/index.html');
-
-    win.webContents.openDevTools({ mode: 'undocked' });
-    win.once('ready-to-show', () => {
-        win.show()
-    })
-}
-
-function createAboutWindow():void {
-    const win = new BrowserWindow({
-        width: 260,
-        height: 130,
-        resizable: false,
-        // 不可最大化
-        minimizable: false,
-        // 隐藏titleBar
-        titleBarStyle: 'hidden',
-        show: false
-            // transparent: true
-    })
-
-    win.loadFile('html/about.html');
-    win.once('ready-to-show', () => {
-        win.show()
-    });
-    win.on("blur", () => {
-        win.close();
-    });
-}
+import { app, BrowserWindow, Tray, Menu, nativeImage } from 'electron';
+import { createAboutWindow, createMainWindow } from './window_create';
+import { log } from "./log"
 
 let tray
 
 app.whenReady().then(() => {
+    log.info('app ready');
     createMainWindow()
 
     app.on('activate', () => {
@@ -76,13 +21,13 @@ app.whenReady().then(() => {
 
     // 注意: 你的 contextMenu, Tooltip 和 Title 代码需要写在这里!
     const contextMenu = Menu.buildFromTemplate([{
-            label: '关于',
-            type: 'normal',
-            click: (_menuItem: any, _browserWindow: any, _event: any) => {
-                createAboutWindow()
-            }
-        },
-        { label: '退出', type: 'normal', role: "quit" },
+        label: '关于',
+        type: 'normal',
+        click: (_menuItem: any, _browserWindow: any, _event: any) => {
+            createAboutWindow()
+        }
+    },
+    { label: '退出', type: 'normal', role: "quit" },
     ])
 
     tray.setContextMenu(contextMenu)
@@ -92,6 +37,7 @@ app.whenReady().then(() => {
 })
 
 app.on('window-all-closed', () => {
+    log.info('app window-all-closed');
     if (process.platform !== 'darwin') {
         app.quit()
     }

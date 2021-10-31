@@ -1,7 +1,9 @@
 module.exports = {
     entry: {
         // 主窗口preload
-        mainPreload: "./src/preload.ts",
+        mainPreload: "./src/preload/main_win.ts",
+        // 主窗口运行内容
+        mainWin: "./src/page/main_win.ts",
         // 主线程入口
         main: "./src/main.ts"
     },
