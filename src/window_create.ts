@@ -33,7 +33,7 @@ export function createMainWindow(): void {
 
     win.loadFile('html/index.html');
 
-    win.webContents.openDevTools({ mode: 'undocked' });
+    // win.webContents.openDevTools({ mode: 'undocked' });
     win.once('ready-to-show', () => {
         win.show()
     })
